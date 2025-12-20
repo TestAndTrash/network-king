@@ -17,8 +17,14 @@ public class PlayerMovement : NetworkIdentity
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
+            Debug.Log("Changing Color");
             SetColor(_color);
         }
+
+        Debug.Log(Input.GetAxis("Horizontal"));
+        Debug.Log(Input.GetAxis("Vertical"));
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        transform.position += move * (Time.deltaTime * 5f);
     }
 
     [ObserversRpc(bufferLast: true)]
