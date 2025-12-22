@@ -82,6 +82,7 @@ Transform:
   - {fileID: 6006672431336058676}
   - {fileID: 4409779665807890144}
   - {fileID: 8413120648252553203}
+  - {fileID: 36309065354996984}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &7009508384467669711
@@ -121,8 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e61666d6a60d87c19a2a24ebe3e2cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _networkRules: {fileID: 0}
-  _visitiblityRules: {fileID: 0}
   _isSetup: 0
   _prefabId: -2147483648
   _componentIndex: -2147483648
@@ -130,11 +129,8 @@ MonoBehaviour:
   _parent: {fileID: 0}
   _invertedPathToNearestParent: 
   _directChildren: []
-  moveSpeed: 5
-  sprintSpeed: 8
-  jumpForce: 1
-  gravity: -9.81
-  groundCheckDistance: 0.2
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
   lookSensitivity: 2
   maxLookAngle: 80
   playerCamera: {fileID: 2734983123550469391}
@@ -152,8 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 817fe5016bd0a2a49a95b6eb338bb132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _networkRules: {fileID: 0}
-  _visitiblityRules: {fileID: 0}
   _isSetup: 0
   _prefabId: -2147483648
   _componentIndex: -2147483648
@@ -161,6 +155,8 @@ MonoBehaviour:
   _parent: {fileID: 0}
   _invertedPathToNearestParent: 
   _directChildren: []
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
   _syncPosition: 1
   _syncRotation: 1
   _syncScale: 1
@@ -285,7 +281,7 @@ Transform:
   m_GameObject: {fileID: 6377488245455267036}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.61, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -373,3 +369,119 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damping: 0
+--- !u!1001 &1577981225840271807
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 27178767232470623}
+    m_Modifications:
+    - target: {fileID: -7683635012270487519, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+      propertyPath: lr
+      value: 
+      objectReference: {fileID: 3363284744169518357}
+    - target: {fileID: -7683635012270487519, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 4409779665807890144}
+    - target: {fileID: -7683635012270487519, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+      propertyPath: gunTip
+      value: 
+      objectReference: {fileID: 3871496571226493406}
+    - target: {fileID: -7683635012270487519, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+      propertyPath: tranform
+      value: 
+      objectReference: {fileID: 27178767232470623}
+    - target: {fileID: -7683635012270487519, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+      propertyPath: grappleKey
+      value: 324
+      objectReference: {fileID: 0}
+    - target: {fileID: -7683635012270487519, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+      propertyPath: grapplingCd
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7683635012270487519, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+      propertyPath: parentTranform
+      value: 
+      objectReference: {fileID: 27178767232470623}
+    - target: {fileID: -7683635012270487519, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+      propertyPath: grappleDelayTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -7683635012270487519, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 6828117232110109699}
+    - target: {fileID: -7683635012270487519, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+      propertyPath: maxGrappleDistance
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: -7683635012270487519, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+      propertyPath: isGrappleable.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542170024589757767, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542170024589757767, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542170024589757767, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542170024589757767, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542170024589757767, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542170024589757767, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542170024589757767, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542170024589757767, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542170024589757767, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542170024589757767, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978209528741835777, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+      propertyPath: m_Name
+      value: Grappling Gun
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+--- !u!4 &36309065354996984 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1542170024589757767, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+  m_PrefabInstance: {fileID: 1577981225840271807}
+  m_PrefabAsset: {fileID: 0}
+--- !u!120 &3363284744169518357 stripped
+LineRenderer:
+  m_CorrespondingSourceObject: {fileID: 4272460532336235690, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+  m_PrefabInstance: {fileID: 1577981225840271807}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3871496571226493406 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2331822334000296033, guid: 53d276314ef4ffc45a57af3002a5b2df, type: 3}
+  m_PrefabInstance: {fileID: 1577981225840271807}
+  m_PrefabAsset: {fileID: 0}
