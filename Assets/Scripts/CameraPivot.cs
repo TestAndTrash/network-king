@@ -17,7 +17,6 @@ public class TPSCameraLook : MonoBehaviour
         yaw += mouseX * sensitivity;
         pitch -= mouseY * sensitivity;
 
-        Debug.Log("Yaw: " + yaw + " Pitch: " + pitch);
         pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
 
         transform.rotation = Quaternion.Euler(pitch, yaw, 0f);

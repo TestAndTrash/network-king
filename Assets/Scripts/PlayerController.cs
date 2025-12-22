@@ -38,8 +38,6 @@ public class PlayerController : NetworkIdentity
         } else
         {
             playerCamera.enabled = true;
-            playerCamera.Follow = cameraPivot;
-            playerCamera.LookAt = cameraTarget;
         }
     }
 
@@ -63,15 +61,6 @@ public class PlayerController : NetworkIdentity
 
     private void HandleMovement()
     {
-        float mouseX = Input.GetAxis("Mouse X");
-float mouseY = Input.GetAxis("Mouse Y");
-
-float yaw = 0f;
-float pitch = 0f;
-
-yaw += mouseX * lookSensitivity;
-pitch -= mouseY * lookSensitivity;
-
         bool isGrounded = IsGrounded();
         if (isGrounded && velocity.y < 0)
         {
