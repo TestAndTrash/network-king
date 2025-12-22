@@ -1,4 +1,5 @@
 using System;
+using Assets.Scripts.StateMovement;
 using PurrNet;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -7,11 +8,7 @@ using UnityEngine;
 public class PlayerController : NetworkIdentity
 {
     [Header("Movement Settings")]
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float sprintSpeed = 8f;
-    [SerializeField] private float jumpForce = 1f;
-    [SerializeField] private float gravity = -9.81f;
-    [SerializeField] private float groundCheckDistance = 0.2f;
+    [SerializeField] private StateMovement stateMovement;
 
     [Header("Look Settings")]
     [SerializeField] private float lookSensitivity = 2f;
@@ -22,9 +19,6 @@ public class PlayerController : NetworkIdentity
     [SerializeField] private Transform cameraTarget;
     [SerializeField] private Transform cameraPivot;
 
-    
-    private CharacterController characterController;
-    private Vector3 velocity;
     private float verticalRotation = 0f;
 
     protected override void OnSpawned()
@@ -45,7 +39,7 @@ public class PlayerController : NetworkIdentity
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        characterController = GetComponent<CharacterController>();
+        stateMovement = new StateMovementGrounded(transform);
 
         if (playerCamera == null)
         {
@@ -56,45 +50,9 @@ public class PlayerController : NetworkIdentity
 
     private void Update()
     {
-        HandleMovement();
+        stateMovement.HandleMovement();
     }
 
-    private void HandleMovement()
-    {
-        bool isGrounded = IsGrounded();
-        if (isGrounded && velocity.y < 0)
-        {
-            velocity.y = -2f;
-        }
 
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
 
-        Vector3 moveDirection = transform.right * horizontal + transform.forward * vertical;
-        moveDirection = Vector3.ClampMagnitude(moveDirection, 1f);
-
-        float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : moveSpeed;
-        characterController.Move(moveDirection * currentSpeed * Time.deltaTime);
-
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
-        }
-
-        velocity.y += gravity * Time.deltaTime;
-        characterController.Move(velocity * Time.deltaTime);
-    }
-
-    private bool IsGrounded()
-    {
-        return Physics.Raycast(transform.position + Vector3.up * 0.03f, Vector3.down, groundCheckDistance);
-    }
-
-#if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position + Vector3.up * 0.03f, Vector3.down * groundCheckDistance);
-    }
-#endif
 }
