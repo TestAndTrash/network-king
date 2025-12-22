@@ -1,5 +1,6 @@
 using System;
 using PurrNet;
+using Unity.Cinemachine;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -17,7 +18,10 @@ public class PlayerController : NetworkIdentity
     [SerializeField] private float maxLookAngle = 80f;
 
     [Header("References")]
-    [SerializeField] private Camera playerCamera;
+    [SerializeField] private CinemachineCamera playerCamera;
+    [SerializeField] private Transform cameraTarget;
+    [SerializeField] private Transform cameraPivot;
+
     
     private CharacterController characterController;
     private Vector3 velocity;
@@ -28,16 +32,15 @@ public class PlayerController : NetworkIdentity
         base.OnSpawned();
 
         enabled = isOwner;
-        if(!isOwner)
+        if (!isOwner)
         {
             Destroy(playerCamera.gameObject);
+        } else
+        {
+            playerCamera.enabled = true;
+            playerCamera.Follow = cameraPivot;
+            playerCamera.LookAt = cameraTarget;
         }
-    }
-
-    private void OnDisable()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
 
     private void Start()
@@ -56,11 +59,19 @@ public class PlayerController : NetworkIdentity
     private void Update()
     {
         HandleMovement();
-        HandleRotation();
     }
 
     private void HandleMovement()
     {
+        float mouseX = Input.GetAxis("Mouse X");
+float mouseY = Input.GetAxis("Mouse Y");
+
+float yaw = 0f;
+float pitch = 0f;
+
+yaw += mouseX * lookSensitivity;
+pitch -= mouseY * lookSensitivity;
+
         bool isGrounded = IsGrounded();
         if (isGrounded && velocity.y < 0)
         {
@@ -83,18 +94,6 @@ public class PlayerController : NetworkIdentity
 
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
-    }
-
-    private void HandleRotation()
-    {
-        float mouseX = Input.GetAxis("Mouse X") * lookSensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * lookSensitivity;
-
-        verticalRotation -= mouseY;
-        verticalRotation = Mathf.Clamp(verticalRotation, -maxLookAngle, maxLookAngle);
-        playerCamera.transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
-
-        transform.Rotate(Vector3.up * mouseX);
     }
 
     private bool IsGrounded()
