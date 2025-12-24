@@ -239,13 +239,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba8e3b563283194cb671b92cfa00016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tranform: {fileID: 0}
+  _isSetup: 0
+  _prefabId: -2147483648
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
+  parentTranform: {fileID: 0}
+  playerController: {fileID: 0}
   cam: {fileID: 0}
   gunTip: {fileID: 2331822334000296033}
   isGrappleable:
     serializedVersion: 2
     m_Bits: 128
-  lr: {fileID: 4272460532336235690}
+  lineRenderer: {fileID: 4272460532336235690}
+  stateMovementManager: {fileID: 0}
   maxGrappleDistance: 25
   grappleDelayTime: 0.25
   grapplePoint: {x: 0, y: 0, z: 0}

@@ -1,30 +1,29 @@
 ﻿using System;
+using PurrNet;
 using UnityEngine;
 
 namespace Assets.Scripts.StateMovement
 {
     internal abstract class StateMovement
     {
-        protected float moveSpeed = 5f;
-        protected float sprintSpeed = 8f;
-        protected float jumpForce = 1f;
-        protected float gravity = -9.81f;
+        protected float gravity = Physics.gravity.y;
         protected float groundCheckDistance = 0.2f;
-        protected Transform transform;
+        public Vector3 velocity;
+
         protected CharacterController characterController;
-        protected Vector3 velocity;
+        protected StateMovementManager stateManager;
+        protected Transform transform;
 
-
-        public StateMovement(Transform transform)
+        public StateMovement(StateMovementManager stateMovementManager)
         {
-            this.transform = transform;
-            characterController = this.transform.GetComponent<CharacterController>();
+            stateManager = stateMovementManager;
+            characterController = stateManager.GetComponent<CharacterController>();
+            transform = characterController.transform;
         }
 
-        public virtual void HandleMovement()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void EnterState(StateMovement previousState);
+
+        public abstract void UpdateState();
 
         protected bool IsGrounded()
         {
