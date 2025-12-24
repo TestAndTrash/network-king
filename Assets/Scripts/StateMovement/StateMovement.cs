@@ -25,8 +25,6 @@ namespace Assets.Scripts.StateMovement
 
         public abstract void UpdateState();
 
-
-
         protected bool IsGrounded()
         {
             return Physics.Raycast(transform.position + Vector3.up * 0.03f, Vector3.down, groundCheckDistance);

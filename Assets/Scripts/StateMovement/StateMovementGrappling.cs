@@ -31,7 +31,6 @@ namespace Assets.Scripts.StateMovement
 
         private Vector3 CalculateJumpVelocity(Vector3 startPoint, Vector3 endPoint)
         {
-
             Vector3 direction = (endPoint - startPoint).normalized * moveSpeed;
 
             return direction;
