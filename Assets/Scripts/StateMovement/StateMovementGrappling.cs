@@ -1,14 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using Unity.VisualScripting.FullSerializer;
+using UnityEngine;
 
 namespace Assets.Scripts.StateMovement
 {
     internal class StateMovementGrappling : StateMovement
     {
-        private float grapplingDelay = 0.1f;
         private float overShoot = 2;
 
         public Vector3 target;
-        private Vector3 velocityToSet;
 
 
 
@@ -19,30 +19,27 @@ namespace Assets.Scripts.StateMovement
 
         public override void EnterState()
         {
-            velocityToSet = CalculateJumpVelocity(transform.position, target);
-            //Invoke(nameof(SetVelocity), grapplingDelay);
-            SetVelocity();
+
         }
 
         public override void UpdateState()
         {
+            Debug.Log(transform.position.ToString() + " , " + target.ToString());
 
-        }
-
-
-        private void SetVelocity()
-        {
-            velocity = velocityToSet;
+            velocity = CalculateJumpVelocity(transform.position, target);
+            characterController.Move(velocity * Time.deltaTime);
         }
 
         private Vector3 CalculateJumpVelocity(Vector3 startPoint, Vector3 endPoint)
         {
+
+
             float trajectoryHeight = CalculateOverShoot();
 
             float displacementY = endPoint.y - startPoint.y;
             Vector3 displacementXZ = new Vector3(endPoint.x - startPoint.x, 0f, endPoint.z - startPoint.z);
 
-            Vector3 velocityY = Vector3.up * Mathf.Sqrt(displacementY-2 * gravity * trajectoryHeight);
+            Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * trajectoryHeight);
             Vector3 velocityXZ = displacementXZ / (Mathf.Sqrt(-2 * trajectoryHeight / gravity)
                 + Mathf.Sqrt(2 * (displacementY - trajectoryHeight) / gravity));
 

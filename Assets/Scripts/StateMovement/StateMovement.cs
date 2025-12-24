@@ -6,13 +6,14 @@ namespace Assets.Scripts.StateMovement
 {
     internal abstract class StateMovement
     {
-        protected float gravity = -9.81f;
+        protected float gravity = Physics.gravity.y;
         protected float groundCheckDistance = 0.2f;
-        protected Vector3 velocity;
+        public Vector3 velocity;
 
         protected CharacterController characterController;
         protected StateMovementManager stateManager;
         protected Transform transform;
+
         public StateMovement(StateMovementManager stateMovementManager)
         {
             stateManager = stateMovementManager;

@@ -68,7 +68,7 @@ namespace Assets.Scripts.StateTool
             {
                 grapplePoint = hit.point;
 
-                stateMovementManager.SwitchState(stateMovementManager.stateFreeze);
+                stateMovementManager.SetStateFreeze();
                 Invoke(nameof(ExecuteGrapple), grappleDelayTime); 
             }
             else
@@ -85,13 +85,13 @@ namespace Assets.Scripts.StateTool
 
         private void ExecuteGrapple()
         {
-            stateMovementManager.SwitchState(stateMovementManager.stateGrappling);
+            stateMovementManager.SetStateGrappling(grapplePoint);
         }
 
         private void StopGrapple()
         {
             
-            stateMovementManager.SwitchState(stateMovementManager.stateGrounded);
+            stateMovementManager.SetStateGrounded();
             grappling = false;
             grapplingCdTimer = grapplingCd;
             lineRenderer.enabled = false;

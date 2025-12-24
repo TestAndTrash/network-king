@@ -6,7 +6,9 @@ namespace Assets.Scripts.StateMovement
 {
     internal class StateMovementManager : NetworkIdentity
     {
-        [SerializeField] public StateMovement currentState; 
+        [SerializeField] private StateMovement currentState;
+
+        [SerializeField] public Vector3 veloc;
 
         public StateMovement stateFreeze;
         public StateMovement stateGrappling;
@@ -25,11 +27,31 @@ namespace Assets.Scripts.StateMovement
         public void Update()
         {
             currentState.UpdateState();
+            veloc = currentState.velocity;
         }
 
-        public void SwitchState(StateMovement stateMovement)
+        private void SwitchState(StateMovement state)
         {
-            currentState = stateMovement;
+            currentState = state;
+
+        }
+
+        public void SetStateFreeze()
+        {
+            SwitchState(stateFreeze);
+            currentState.EnterState();
+        }
+
+        public void SetStateGrappling(Vector3 endpoint)
+        {
+            SwitchState(stateGrappling);
+            currentState.EnterState();
+            ((StateMovementGrappling) currentState).target = endpoint;
+        }
+
+        public void SetStateGrounded()
+        {
+            SwitchState(stateGrounded);
             currentState.EnterState();
         }
 
