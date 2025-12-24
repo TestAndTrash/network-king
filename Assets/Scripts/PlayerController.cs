@@ -23,6 +23,13 @@ public class PlayerController : NetworkIdentity
     [SerializeField] private Transform cameraPivot;
 
     
+    public float sensitivity = 3f;
+    public float minPitch = -40f;
+    public float maxPitch = 70f;
+
+    float yaw;
+    float pitch;
+
     private CharacterController characterController;
     private Vector3 velocity;
     private float verticalRotation = 0f;
@@ -88,6 +95,11 @@ public class PlayerController : NetworkIdentity
     private bool IsGrounded()
     {
         return Physics.Raycast(transform.position + Vector3.up * 0.03f, Vector3.down, groundCheckDistance);
+    }
+
+    public void Rotate(float yaw)
+    {
+        transform.rotation = Quaternion.Euler(0f, yaw, 0f);
     }
 
 #if UNITY_EDITOR

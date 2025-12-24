@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class TPSCameraLook : MonoBehaviour
 {
+    [SerializeField] PlayerController playerController;
     public float sensitivity = 3f;
     public float minPitch = -40f;
     public float maxPitch = 70f;
@@ -20,5 +21,7 @@ public class TPSCameraLook : MonoBehaviour
         pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
 
         transform.rotation = Quaternion.Euler(pitch, yaw, 0f);
+
+        playerController.Rotate(yaw);
     }
 }
