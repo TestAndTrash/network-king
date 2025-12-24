@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.Scripts.StateMovement
 {
@@ -13,9 +14,9 @@ namespace Assets.Scripts.StateMovement
 
         }
 
-        public override void EnterState()
+        public override void EnterState(StateMovement previousState)
         {
-
+            velocity = previousState.velocity;
         }
 
         public override void UpdateState()
@@ -32,6 +33,10 @@ namespace Assets.Scripts.StateMovement
             moveDirection = Vector3.ClampMagnitude(moveDirection, 1f);
 
             float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : moveSpeed;
+
+            velocity.x = moveDirection.x * currentSpeed;
+            velocity.z = moveDirection.z * currentSpeed;
+
             characterController.Move(moveDirection * currentSpeed * Time.deltaTime);
 
             if (Input.GetButtonDown("Jump") && isGrounded)

@@ -15,8 +15,9 @@ namespace Assets.Scripts.StateMovement
 
         }
 
-        public override void EnterState()
+        public override void EnterState(StateMovement previousState)
         {
+            velocity = previousState.velocity;
 
         }
 

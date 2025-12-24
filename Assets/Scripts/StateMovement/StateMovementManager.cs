@@ -21,7 +21,6 @@ namespace Assets.Scripts.StateMovement
             stateGrounded = new StateMovementGrounded(this);
 
             currentState = stateGrounded;
-            currentState.EnterState();
         }
 
         public void Update()
@@ -38,21 +37,24 @@ namespace Assets.Scripts.StateMovement
 
         public void SetStateFreeze()
         {
+            StateMovement previousState = currentState;
             SwitchState(stateFreeze);
-            currentState.EnterState();
+            currentState.EnterState(previousState);
         }
 
         public void SetStateGrappling(Vector3 endpoint)
         {
+            StateMovement previousState = currentState;
             SwitchState(stateGrappling);
-            currentState.EnterState();
+            currentState.EnterState(previousState);
             ((StateMovementGrappling) currentState).target = endpoint;
         }
 
         public void SetStateGrounded()
         {
+            StateMovement previousState = currentState;
             SwitchState(stateGrounded);
-            currentState.EnterState();
+            currentState.EnterState(previousState);
         }
 
     }

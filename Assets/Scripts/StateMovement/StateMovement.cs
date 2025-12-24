@@ -21,7 +21,7 @@ namespace Assets.Scripts.StateMovement
             transform = characterController.transform;
         }
 
-        public abstract void EnterState();
+        public abstract void EnterState(StateMovement previousState);
 
         public abstract void UpdateState();
 
