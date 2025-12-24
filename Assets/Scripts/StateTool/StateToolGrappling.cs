@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Assets.Scripts.StringConstant;
+using Assets.Scripts.StateMovement;
 using UnityEngine;
 
 namespace Assets.Scripts.StateTool
@@ -16,7 +12,8 @@ namespace Assets.Scripts.StateTool
         [SerializeField] private Transform cam;
         [SerializeField] private Transform gunTip;
         [SerializeField] private LayerMask isGrappleable;
-        [SerializeField] private LineRenderer lr;
+        [SerializeField] private LineRenderer lineRenderer;
+        [SerializeField] private StateMovementManager stateMovementManager;
 
         [Header("Grappling")]
         [SerializeField] private float maxGrappleDistance;
@@ -33,9 +30,21 @@ namespace Assets.Scripts.StateTool
         private bool grappling = false;
 
 
+
         public void Update()
         {
-            if(Input.GetKeyDown(grappleKey)) StartGrapple();
+            if (Input.GetKeyDown(grappleKey))
+            {
+                if (grappling)
+                {
+                    StopGrapple();
+                } else
+                {
+                    StartGrapple();
+
+                }
+
+            }
 
             if (grapplingCdTimer > 0)
                 grapplingCdTimer -= Time.deltaTime;
@@ -45,7 +54,7 @@ namespace Assets.Scripts.StateTool
         public void LateUpdate()
         {
             if (grappling)
-                lr.SetPosition(0, gunTip.position);
+                lineRenderer.SetPosition(0, gunTip.position);
         }
 
         private void StartGrapple()
@@ -59,7 +68,8 @@ namespace Assets.Scripts.StateTool
             {
                 grapplePoint = hit.point;
 
-                Invoke(nameof(ExecuteGrapple), grappleDelayTime);
+                stateMovementManager.SwitchState(stateMovementManager.stateFreeze);
+                Invoke(nameof(ExecuteGrapple), grappleDelayTime); 
             }
             else
             {
@@ -68,21 +78,23 @@ namespace Assets.Scripts.StateTool
                 Invoke(nameof(StopGrapple), grappleDelayTime);
             }
 
-            lr.enabled = true;
-            lr.SetPosition(1, grapplePoint);
+            lineRenderer.enabled = true;
+            lineRenderer.SetPosition(1, grapplePoint);
 
         }
 
         private void ExecuteGrapple()
         {
-
+            stateMovementManager.SwitchState(stateMovementManager.stateGrappling);
         }
 
         private void StopGrapple()
         {
+            
+            stateMovementManager.SwitchState(stateMovementManager.stateGrounded);
             grappling = false;
             grapplingCdTimer = grapplingCd;
-            lr.enabled = false;
+            lineRenderer.enabled = false;
         }
 
     }

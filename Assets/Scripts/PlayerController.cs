@@ -8,9 +8,6 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : NetworkIdentity
 {
-    [Header("Movement Settings")]
-    [SerializeField] private StateMovement stateMovement;
-
     [Header("Look Settings")]
     [SerializeField] private float lookSensitivity = 2f;
     [SerializeField] private float maxLookAngle = 80f;
@@ -40,18 +37,12 @@ public class PlayerController : NetworkIdentity
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        stateMovement = new StateMovementGrounded(transform);
 
         if (playerCamera == null)
         {
             enabled = false;
             return;
         }
-    }
-
-    private void Update()
-    {
-        stateMovement.HandleMovement();
     }
 
 
