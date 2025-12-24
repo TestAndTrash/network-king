@@ -27,12 +27,10 @@ public class PlayerController : NetworkIdentity
     public float minPitch = -40f;
     public float maxPitch = 70f;
 
-    float yaw;
-    float pitch;
-
-    private CharacterController characterController;
+    public CharacterController characterController;
     private Vector3 velocity;
-    private float verticalRotation = 0f;
+
+    public float currentGravity;
 
     protected override void OnSpawned()
     {
@@ -42,9 +40,11 @@ public class PlayerController : NetworkIdentity
         if (!isOwner)
         {
             Destroy(playerCamera.gameObject);
-        } else
+        }
+        else
         {
             playerCamera.enabled = true;
+            currentGravity = gravity;
         }
     }
 
@@ -72,6 +72,8 @@ public class PlayerController : NetworkIdentity
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
+            velocity.x = 0f;
+            velocity.z = 0f;
         }
 
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -85,14 +87,14 @@ public class PlayerController : NetworkIdentity
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+            velocity.y = Mathf.Sqrt(jumpForce * -2f * currentGravity);
         }
 
-        velocity.y += gravity * Time.deltaTime;
+        velocity.y += currentGravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         return Physics.Raycast(transform.position + Vector3.up * 0.03f, Vector3.down, groundCheckDistance);
     }
@@ -100,6 +102,24 @@ public class PlayerController : NetworkIdentity
     public void Rotate(float yaw)
     {
         transform.rotation = Quaternion.Euler(0f, yaw, 0f);
+    }
+
+    public void SetGravity(float newGravity = 0f)
+    {
+        if (newGravity == 0f)
+        {
+            newGravity = gravity;
+        }
+        currentGravity = newGravity;
+    }
+
+    public void SetVelocity(Vector3 newVelocity = default)
+    {
+        if (newVelocity != default)
+        {
+            Debug.Log("Setting velocity to: " + newVelocity);
+            velocity = newVelocity;
+        }
     }
 
 #if UNITY_EDITOR

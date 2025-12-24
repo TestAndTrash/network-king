@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 7009508384467669711}
   - component: {fileID: 6828117232110109699}
   - component: {fileID: 3605617551152302487}
+  - component: {fileID: 3449565909268279261}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -144,6 +145,8 @@ MonoBehaviour:
   sensitivity: 3
   minPitch: -40
   maxPitch: 70
+  characterController: {fileID: 0}
+  currentGravity: 0
 --- !u!114 &3605617551152302487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,6 +178,25 @@ MonoBehaviour:
   _characterControllerPatch: 0
   _ownerAuth: 1
   _interpolationTiming: 0
+--- !u!114 &3449565909268279261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4062520989132475503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 377b039be240f4e38a182ab5362eba74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 6828117232110109699}
+  wallRunDuration: 2
+  wallRunGravity: -2
+  wallRunSpeed: 5
+  wallJumpUpForce: 5
+  wallJumpSideForce: 8
+  jumpCharges: 1
 --- !u!1 &5729091704545752728
 GameObject:
   m_ObjectHideFlags: 0
